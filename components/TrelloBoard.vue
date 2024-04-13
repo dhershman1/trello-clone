@@ -24,6 +24,8 @@ const columns = ref<Column[]>([{
   { title: "In Progress", id: nanoid(), tasks: [] },
   { title: "QA", id: nanoid(), tasks: [] },
   { title: "Complete", id: nanoid(), tasks: [] },])
+
+const ctrl = useKeyModifier('Control')
 </script>
 
 <template>
@@ -46,7 +48,7 @@ const columns = ref<Column[]>([{
           </header>
           <draggable
             v-model="column.tasks"
-            group="tasks"
+            :group="{ name: 'tasks', pull: ctrl ? 'clone' : true }"
             handle=".drag-handle"
             :animation="150"
             item-key="id"
